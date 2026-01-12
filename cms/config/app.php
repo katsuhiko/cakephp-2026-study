@@ -131,6 +131,20 @@ return [
             'duration' => '+1 years',
             'url' => env('CACHE_CAKEMODEL_URL', null),
         ],
+
+        /*
+         * Configure the cache for translations. This cache configuration is
+         * used to store i18n message catalogs.
+         * Duration will be set to '+2 minutes' in bootstrap.php when debug = true
+         */
+        '_cake_translations_' => [
+            'className' => FileEngine::class,
+            'prefix' => 'myapp_cake_translations_',
+            'path' => CACHE . 'persistent' . DS,
+            'serialize' => true,
+            'duration' => '+1 years',
+            'url' => env('CACHE_CAKETRANSLATIONS_URL', null),
+        ],
     ],
 
     /*

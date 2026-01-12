@@ -38,7 +38,7 @@ class ApplicationTest extends TestCase
      *
      * @return void
      */
-    public function testBootstrap()
+    public function testBootstrap(): void
     {
         Configure::write('debug', false);
         $app = new Application(dirname(dirname(__DIR__)) . '/config');
@@ -55,7 +55,7 @@ class ApplicationTest extends TestCase
      *
      * @return void
      */
-    public function testBootstrapInDebug()
+    public function testBootstrapInDebug(): void
     {
         Configure::write('debug', true);
         $app = new Application(dirname(dirname(__DIR__)) . '/config');
@@ -70,7 +70,7 @@ class ApplicationTest extends TestCase
      *
      * @return void
      */
-    public function testBootstrapPluginWithoutHalt()
+    public function testBootstrapPluginWithoutHalt(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -90,7 +90,7 @@ class ApplicationTest extends TestCase
      *
      * @return void
      */
-    public function testMiddleware()
+    public function testMiddleware(): void
     {
         $app = new Application(dirname(dirname(__DIR__)) . '/config');
         $middleware = new MiddlewareQueue();
