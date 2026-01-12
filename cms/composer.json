@@ -16,6 +16,7 @@
         "cakephp/cakephp-codesniffer": "^5.0",
         "cakephp/debug_kit": "^5.0.0",
         "josegonzalez/dotenv": "^4.0",
+        "phpstan/phpstan": "^2.1",
         "phpunit/phpunit": "^10.1.0"
     },
     "suggest": {
@@ -39,12 +40,13 @@
         "post-install-cmd": "App\\Console\\Installer::postInstall",
         "post-create-project-cmd": "App\\Console\\Installer::postInstall",
         "check": [
-            "@test",
-            "@cs-check"
+            "@stan",
+            "@cs-check",
+            "@test"
         ],
         "cs-check": "phpcs --colors -p",
         "cs-fix": "phpcbf --colors -p",
-        "stan": "phpstan analyse",
+        "stan": "phpstan analyse --memory-limit=1G",
         "test": "phpunit --colors=always"
     },
     "prefer-stable": true,

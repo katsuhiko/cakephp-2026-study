@@ -1,6 +1,4 @@
 parameters:
     level: 8
-    treatPhpDocTypesAsCertain: false
-    checkGenericClassInNonGenericObjectType: false
     paths:
         - src/
