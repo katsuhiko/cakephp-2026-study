@@ -46,7 +46,6 @@ docker exec -it -w /app/cms cli bin/cake server -H 0.0.0.0
 
 ```
 sqlite3 ./tmp/products.sqlite < ./config/schema/cms.sql
-````
 
 ```
 sqlite3 ./tmp/products.sqlite
