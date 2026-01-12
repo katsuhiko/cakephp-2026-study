@@ -1,0 +1,10 @@
+services:
+  cli:
+    build: .
+    container_name: cli
+    working_dir: /app
+    tty: true
+    volumes:
+      - ./:/app:cached
+    ports:
+      - "8765:8765"
