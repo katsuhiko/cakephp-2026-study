@@ -122,6 +122,26 @@ class ArticlesTableTest extends TestCase
                 'errorField' => 'user_id',
                 'errorKey' => '_empty',
             ],
+            'empty body' => [
+                'userId' => '1',
+                'title' => 'Test Article',
+                'slug' => 'test-article',
+                'body' => '',
+                'published' => '1',
+                'shouldSucceed' => false,
+                'errorField' => 'body',
+                'errorKey' => '_empty',
+            ],
+            'empty published' => [
+                'userId' => '1',
+                'title' => 'Test Article',
+                'slug' => 'test-article',
+                'body' => 'Test body content',
+                'published' => '',
+                'shouldSucceed' => false,
+                'errorField' => 'published',
+                'errorKey' => '_empty',
+            ],
         ];
     }
 
