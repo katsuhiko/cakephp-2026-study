@@ -36,8 +36,7 @@ class CreateUsers extends BaseMigration
         ]);
         $table->addIndex([
             'email',
-        
-            ], [
+        ], [
             'name' => 'UNIQUE_EMAIL',
             'unique' => true,
         ]);
