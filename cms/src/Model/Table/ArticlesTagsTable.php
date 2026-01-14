@@ -24,6 +24,7 @@ use Cake\ORM\Table;
  * @method iterable<\App\Model\Entity\ArticlesTag>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\ArticlesTag> saveManyOrFail(iterable $entities, array $options = [])
  * @method iterable<\App\Model\Entity\ArticlesTag>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\ArticlesTag>|false deleteMany(iterable $entities, array $options = [])
  * @method iterable<\App\Model\Entity\ArticlesTag>|\Cake\Datasource\ResultSetInterface<\App\Model\Entity\ArticlesTag> deleteManyOrFail(iterable $entities, array $options = [])
+ * @mixin \Cake\ORM\Behavior\TimestampBehavior
  */
 class ArticlesTagsTable extends Table
 {
@@ -40,6 +41,8 @@ class ArticlesTagsTable extends Table
         $this->setTable('articles_tags');
         $this->setDisplayField(['article_id', 'tag_id']);
         $this->setPrimaryKey(['article_id', 'tag_id']);
+
+        $this->addBehavior('Timestamp');
 
         $this->belongsTo('Articles', [
             'foreignKey' => 'article_id',

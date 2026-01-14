@@ -21,6 +21,8 @@ class ArticlesTagsFixture extends TestFixture
             [
                 'article_id' => 1,
                 'tag_id' => 1,
+                'created' => '2026-01-12 15:40:53',
+                'modified' => '2026-01-12 15:40:53',
             ],
         ];
         parent::init();
