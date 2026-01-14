@@ -12,10 +12,10 @@ use Cake\ORM\Entity;
  * @property int $user_id
  * @property string $title
  * @property string $slug
- * @property string|null $body
- * @property bool|null $published
- * @property \Cake\I18n\DateTime|null $created
- * @property \Cake\I18n\DateTime|null $modified
+ * @property string $body
+ * @property bool $published
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  *
  * @property \App\Model\Entity\User $user
  * @property \App\Model\Entity\Tag[] $tags

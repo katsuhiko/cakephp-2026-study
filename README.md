@@ -5,16 +5,11 @@ docker compose up -d
 docker exec -it cli bash
 ```
 
-## スケルトン作成
-
-```
-php composer.phar create-project cakephp/app:5.* cms
-```
-
 ## CMSチュートリアル
 
 ```
 docker exec -it cli bash
+php composer.phar create-project cakephp/app:5.* cms
 cd ./cms
 ```
 
@@ -23,7 +18,35 @@ cd ./cms
 ```
 php ../composer.phar require --dev phpstan/phpstan
 
-docker exec -it -w /app/cms cli php ../composer.phar require --dev phpstan/phpstan
+php ../composer.phar require cakephp/migrations "@stable"
+bin/cake plugin load Migrations
+```
+
+### Bake
+
+```
+bin/cake bake migration CreateUsers email:string password:string created modified
+bin/cake bake migration CreateArticles user_id:integer title:string slug:string[191]:unique body:text published:boolean created modified
+bin/cake bake migration CreateTags title:string[191]:unique created modified
+bin/cake bake migration CreateArticlesTags article_id:integer:primary tag_id:integer:primary created modified
+
+bin/cake bake seed Users
+bin/cake bake seed Articles
+
+bin/cake bake model Users
+bin/cake bake model Articles
+bin/cake bake model Tags
+bin/cake bake model ArticlesTags
+```
+
+### マイグレーション
+
+```
+bin/cake migrations migrate
+bin/cake migrations seed --seed UsersSeed --seed ArticlesSeed
+
+docker exec -it -w /app/cms cli bin/cake migrations migrate
+docker exec -it -w /app/cms cli bin/cake migrations seed --seed UsersSeed --seed ArticlesSeed
 ```
 
 ### Push 前確認
@@ -43,15 +66,6 @@ docker exec -it -w /app/cms cli bin/cake server -H 0.0.0.0
 ```
 
 ### Sqlite
-
-```
-sqlite3 ./tmp/products.sqlite < ./config/schema/cms-dropall.sql
-sqlite3 ./tmp/products.sqlite < ./config/schema/cms.sql
-sqlite3 ./tmp/products.sqlite < ./config/schema/cms-data.sql
-
-sqlite3 ./tmp/tests.sqlite < ./config/schema/cms-dropall.sql
-sqlite3 ./tmp/tests.sqlite < ./config/schema/cms.sql
-```
 
 ```
 sqlite3 ./tmp/products.sqlite

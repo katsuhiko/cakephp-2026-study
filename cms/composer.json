@@ -7,7 +7,7 @@
     "require": {
         "php": ">=8.2",
         "cakephp/cakephp": "^5.3.0",
-        "cakephp/migrations": "^4.0.0",
+        "cakephp/migrations": "@stable",
         "cakephp/plugin-installer": "^2.0",
         "mobiledetect/mobiledetectlib": "^4.8.03"
     },
@@ -55,6 +55,6 @@
         "cs-check": "phpcs --colors -p",
         "cs-fix": "phpcbf --colors -p",
         "test": "phpunit --colors=always",
-        "stan": "phpstan analyse"
+        "stan": "phpstan analyse --memory-limit=1G"
     }
 }

@@ -10,6 +10,8 @@ use Cake\ORM\Entity;
  *
  * @property int $article_id
  * @property int $tag_id
+ * @property \Cake\I18n\DateTime $created
+ * @property \Cake\I18n\DateTime $modified
  *
  * @property \App\Model\Entity\Article $article
  * @property \App\Model\Entity\Tag $tag
@@ -28,6 +30,8 @@ class ArticlesTag extends Entity
     protected array $_accessible = [
         'article_id' => true,
         'tag_id' => true,
+        'created' => true,
+        'modified' => true,
         'article' => true,
         'tag' => true,
     ];
