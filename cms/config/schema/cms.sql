@@ -2,7 +2,7 @@
 
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    email VARCHAR(255) NOT NULL,
+    email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     created DATETIME,
     modified DATETIME
@@ -22,7 +22,7 @@ CREATE TABLE articles (
 
 CREATE TABLE tags (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title VARCHAR(191) UNIQUE,
+    title VARCHAR(191) NOT NULL UNIQUE,
     created DATETIME,
     modified DATETIME
 );
@@ -34,11 +34,3 @@ CREATE TABLE articles_tags (
     FOREIGN KEY (tag_id) REFERENCES tags(id),
     FOREIGN KEY (article_id) REFERENCES articles(id)
 );
-
-INSERT INTO users (email, password, created, modified)
-VALUES
-('cakephp@example.com', 'secret', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
-
-INSERT INTO articles (user_id, title, slug, body, published, created, modified)
-VALUES
-(1, 'First Post', 'first-post', 'This is the first post.', 1, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

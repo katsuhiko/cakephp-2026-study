@@ -1,4 +1,22 @@
 parameters:
-    level: 8
+    level: max
     paths:
         - src/
+    ignoreErrors:
+        -
+            identifier: argument.type
+            path: src/Application.php
+        -
+            identifier: foreach.nonIterable
+            path: src/Console/Installer.php
+        -
+            identifier: binaryOp.invalid
+            path: src/Console/Installer.php
+        -
+            identifier: missingType.iterableValue
+            paths:
+                - src/Model/Table/*
+        -
+            identifier: propertyTag.unresolvableType
+            paths:
+                - src/Model/Table/*

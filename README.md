@@ -45,7 +45,13 @@ docker exec -it -w /app/cms cli bin/cake server -H 0.0.0.0
 ### Sqlite
 
 ```
+sqlite3 ./tmp/products.sqlite < ./config/schema/cms-dropall.sql
 sqlite3 ./tmp/products.sqlite < ./config/schema/cms.sql
+sqlite3 ./tmp/products.sqlite < ./config/schema/cms-data.sql
+
+sqlite3 ./tmp/tests.sqlite < ./config/schema/cms-dropall.sql
+sqlite3 ./tmp/tests.sqlite < ./config/schema/cms.sql
+```
 
 ```
 sqlite3 ./tmp/products.sqlite
