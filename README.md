@@ -8,7 +8,7 @@ docker exec -it cli bash
 ## スケルトン作成
 
 ```
-php composer.phar create-project cakephp/app:5 cms
+php composer.phar create-project cakephp/app:5.* cms
 ```
 
 ## CMSチュートリアル

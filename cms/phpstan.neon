@@ -1,17 +1,14 @@
 parameters:
     level: max
+    treatPhpDocTypesAsCertain: false
+    bootstrapFiles:
+        - config/bootstrap.php
     paths:
         - src/
     ignoreErrors:
         -
             identifier: argument.type
             path: src/Application.php
-        -
-            identifier: foreach.nonIterable
-            path: src/Console/Installer.php
-        -
-            identifier: binaryOp.invalid
-            path: src/Console/Installer.php
         -
             identifier: missingType.iterableValue
             paths:

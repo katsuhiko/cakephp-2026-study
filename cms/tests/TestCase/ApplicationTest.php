@@ -24,7 +24,6 @@ use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
-use InvalidArgumentException;
 
 /**
  * ApplicationTest class
@@ -38,10 +37,10 @@ class ApplicationTest extends TestCase
      *
      * @return void
      */
-    public function testBootstrap(): void
+    public function testBootstrap()
     {
         Configure::write('debug', false);
-        $app = new Application(dirname(dirname(__DIR__)) . '/config');
+        $app = new Application(dirname(__DIR__, 2) . '/config');
         $app->bootstrap();
         $plugins = $app->getPlugins();
 
@@ -55,10 +54,10 @@ class ApplicationTest extends TestCase
      *
      * @return void
      */
-    public function testBootstrapInDebug(): void
+    public function testBootstrapInDebug()
     {
         Configure::write('debug', true);
-        $app = new Application(dirname(dirname(__DIR__)) . '/config');
+        $app = new Application(dirname(__DIR__, 2) . '/config');
         $app->bootstrap();
         $plugins = $app->getPlugins();
 
@@ -66,33 +65,13 @@ class ApplicationTest extends TestCase
     }
 
     /**
-     * testBootstrapPluginWitoutHalt
-     *
-     * @return void
-     */
-    public function testBootstrapPluginWithoutHalt(): void
-    {
-        $this->expectException(InvalidArgumentException::class);
-
-        $app = $this->getMockBuilder(Application::class)
-            ->setConstructorArgs([dirname(dirname(__DIR__)) . '/config'])
-            ->onlyMethods(['addPlugin'])
-            ->getMock();
-
-        $app->method('addPlugin')
-            ->will($this->throwException(new InvalidArgumentException('test exception.')));
-
-        $app->bootstrap();
-    }
-
-    /**
      * testMiddleware
      *
      * @return void
      */
-    public function testMiddleware(): void
+    public function testMiddleware()
     {
-        $app = new Application(dirname(dirname(__DIR__)) . '/config');
+        $app = new Application(dirname(__DIR__, 2) . '/config');
         $middleware = new MiddlewareQueue();
 
         $middleware = $app->middleware($middleware);

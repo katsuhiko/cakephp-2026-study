@@ -140,7 +140,7 @@ class ArticlesTableTest extends TestCase
         string $published,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $article = $this->Articles->newEntity([
@@ -217,7 +217,7 @@ class ArticlesTableTest extends TestCase
         string $published,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $article = $this->Articles->newEntity([

@@ -110,7 +110,7 @@ class UsersTableTest extends TestCase
         string $password,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $user = $this->Users->newEntity([
@@ -165,7 +165,7 @@ class UsersTableTest extends TestCase
         string $password,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $user = $this->Users->newEntity([

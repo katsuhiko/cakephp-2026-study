@@ -21,7 +21,7 @@ namespace App\View;
  * Currently only switches the default layout and sets the response type -
  * which just maps to text/html by default.
  *
- * @extends AppView<self>
+ * @extends \App\View\AppView<self>
  */
 class AjaxView extends AppView
 {

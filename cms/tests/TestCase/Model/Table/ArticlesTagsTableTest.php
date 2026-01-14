@@ -99,7 +99,7 @@ class ArticlesTagsTableTest extends TestCase
         string $tagId,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $articlesTag = $this->ArticlesTags->newEntity([

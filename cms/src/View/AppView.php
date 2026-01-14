@@ -22,9 +22,9 @@ use Cake\View\View;
  *
  * Your application's default view class
  *
- * @template TSubject of AppView
+ * @template TSubject of \App\View\AppView
  * @extends \Cake\View\View<TSubject>
- * @link https://book.cakephp.org/4/en/views.html#the-app-view
+ * @link https://book.cakephp.org/5/en/views.html#the-app-view
  */
 class AppView extends View
 {

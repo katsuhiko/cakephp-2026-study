@@ -94,7 +94,7 @@ class TagsTableTest extends TestCase
         string $title,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $tag = $this->Tags->newEntity([
@@ -145,7 +145,7 @@ class TagsTableTest extends TestCase
         string $title,
         bool $shouldSucceed,
         ?string $errorField,
-        ?string $errorKey
+        ?string $errorKey,
     ): void {
         // Arrange
         $tag = $this->Tags->newEntity([
