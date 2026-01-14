@@ -47,10 +47,7 @@ class CreateArticles extends BaseMigration
             'default' => null,
             'null' => false,
         ]);
-        $table->addIndex([
-            'slug',
-        
-            ], [
+        $table->addIndex(['slug'], [
             'name' => 'UNIQUE_SLUG',
             'unique' => true,
         ]);
