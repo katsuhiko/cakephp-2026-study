@@ -31,8 +31,7 @@ class CreateTags extends BaseMigration
         ]);
         $table->addIndex([
             'title',
-        
-            ], [
+        ], [
             'name' => 'UNIQUE_TITLE',
             'unique' => true,
         ]);
