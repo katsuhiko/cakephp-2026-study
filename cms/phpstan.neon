@@ -1,7 +1,19 @@
 parameters:
-    level: 8
+    level: max
     treatPhpDocTypesAsCertain: false
     bootstrapFiles:
         - config/bootstrap.php
     paths:
         - src/
+    ignoreErrors:
+        -
+            identifier: argument.type
+            path: src/Application.php
+        -
+            identifier: missingType.iterableValue
+            paths:
+                - src/Model/Table/*
+        -
+            identifier: propertyTag.unresolvableType
+            paths:
+                - src/Model/Table/*

@@ -55,6 +55,6 @@
         "cs-check": "phpcs --colors -p",
         "cs-fix": "phpcbf --colors -p",
         "test": "phpunit --colors=always",
-        "stan": "phpstan analyse --memory-limit=1G"
+        "stan": "phpstan analyse"
     }
 }
