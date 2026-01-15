@@ -183,11 +183,6 @@ class UsersControllerTest extends TestCase
         // Arrange
         $this->enableCsrfToken();
 
-        // Get current password hash for comparison
-        $users = $this->getTableLocator()->get('Users');
-        $userBefore = $users->get(1);
-        $oldPasswordHash = $userBefore->password;
-
         $data = [
             'password' => 'newpassword123',
         ];
@@ -200,9 +195,13 @@ class UsersControllerTest extends TestCase
         $this->assertRedirect(['controller' => 'Users', 'action' => 'index']);
         $this->assertFlashMessage('The password has been changed.');
 
-        // Verify the password was actually updated
-        $userAfter = $users->get(1);
-        $this->assertNotEquals($oldPasswordHash, $userAfter->password);
+        // Verify the password was actually updated and hashed correctly
+        $users = $this->getTableLocator()->get('Users');
+        $user = $users->get(1);
+        $this->assertTrue(
+            password_verify('newpassword123', $user->password),
+            'Password was not hashed correctly or does not match the expected value',
+        );
     }
 
     /**
