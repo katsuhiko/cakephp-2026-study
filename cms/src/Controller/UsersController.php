@@ -67,13 +67,39 @@ class UsersController extends AppController
     {
         $user = $this->Users->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, (array)$this->request->getData());
+            $user = $this->Users->patchEntity($user, (array)$this->request->getData(), [
+                'fieldList' => ['email'],
+            ]);
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('The user has been saved.'));
 
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The user could not be saved. Please, try again.'));
+        }
+        $this->set(compact('user'));
+    }
+
+    /**
+     * Change Password method
+     *
+     * @param string $id User id.
+     * @return \Cake\Http\Response|null|void Redirects on successful password change, renders view otherwise.
+     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+     */
+    public function changePassword(string $id)
+    {
+        $user = $this->Users->get($id);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $user = $this->Users->patchEntity($user, (array)$this->request->getData(), [
+                'fieldList' => ['password'],
+            ]);
+            if ($this->Users->save($user)) {
+                $this->Flash->success(__('The password has been changed.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The password could not be changed. Please, try again.'));
         }
         $this->set(compact('user'));
     }

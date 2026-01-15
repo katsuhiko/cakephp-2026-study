@@ -28,6 +28,7 @@
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
+                        <?= $this->Html->link(__('Change Password'), ['action' => 'changePassword', $user->id]) ?>
                         <?= $this->Form->postLink(
                             __('Delete'),
                             ['action' => 'delete', $user->id],

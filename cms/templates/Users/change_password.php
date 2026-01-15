@@ -8,7 +8,7 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Change Password'), ['action' => 'changePassword', $user->id], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $user->id],
@@ -21,9 +21,13 @@
         <div class="users form content">
             <?= $this->Form->create($user) ?>
             <fieldset>
-                <legend><?= __('Edit User') ?></legend>
+                <legend><?= __('Change Password') ?></legend>
                 <?php
-                    echo $this->Form->control('email');
+                    echo $this->Form->control('password', [
+                        'type' => 'password',
+                        'value' => '',
+                        'label' => __('New Password'),
+                    ]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

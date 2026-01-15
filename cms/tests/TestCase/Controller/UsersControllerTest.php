@@ -155,6 +155,57 @@ class UsersControllerTest extends TestCase
     }
 
     /**
+     * Test changePassword method (GET)
+     *
+     * @return void
+     * @link \App\Controller\UsersController::changePassword()
+     */
+    public function testChangePasswordGet(): void
+    {
+        // Act
+        $this->get('/users/change-password/1');
+
+        // Assert
+        $this->assertResponseOk();
+        $user = $this->viewVariable('user');
+        $this->assertInstanceOf('App\Model\Entity\User', $user);
+        $this->assertEquals(1, $user->id);
+    }
+
+    /**
+     * Test changePassword method (POST)
+     *
+     * @return void
+     * @link \App\Controller\UsersController::changePassword()
+     */
+    public function testChangePasswordPost(): void
+    {
+        // Arrange
+        $this->enableCsrfToken();
+
+        // Get current password hash for comparison
+        $users = $this->getTableLocator()->get('Users');
+        $userBefore = $users->get(1);
+        $oldPasswordHash = $userBefore->password;
+
+        $data = [
+            'password' => 'newpassword123',
+        ];
+
+        // Act
+        $this->post('/users/change-password/1', $data);
+
+        // Assert
+        $this->assertResponseSuccess();
+        $this->assertRedirect(['controller' => 'Users', 'action' => 'index']);
+        $this->assertFlashMessage('The password has been changed.');
+
+        // Verify the password was actually updated
+        $userAfter = $users->get(1);
+        $this->assertNotEquals($oldPasswordHash, $userAfter->password);
+    }
+
+    /**
      * Test delete method
      *
      * @return void
