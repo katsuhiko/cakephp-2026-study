@@ -12,46 +12,19 @@ use Cake\TestSuite\TestCase;
 class UserTest extends TestCase
 {
     /**
-     * Test subject
-     *
-     * @var \App\Model\Entity\User
-     */
-    protected $User;
-
-    /**
-     * setUp method
-     *
-     * @return void
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-        $this->User = new User();
-    }
-
-    /**
-     * tearDown method
-     *
-     * @return void
-     */
-    protected function tearDown(): void
-    {
-        unset($this->User);
-        parent::tearDown();
-    }
-
-    /**
      * Test password hashing on entity creation
      *
      * @return void
      */
     public function testPasswordHashing(): void
     {
+        // Act
         $user = new User([
             'email' => 'test@example.com',
             'password' => 'secret',
         ]);
 
+        // Assert
         $this->assertNotEquals('secret', $user->password);
         $this->assertTrue(password_verify('secret', $user->password), 'Password should be hashed correctly');
     }
@@ -63,6 +36,7 @@ class UserTest extends TestCase
      */
     public function testPasswordHashingOnUpdate(): void
     {
+        // Arrange
         $user = new User([
             'email' => 'test@example.com',
             'password' => 'original',
@@ -70,7 +44,10 @@ class UserTest extends TestCase
 
         $originalHash = $user->password;
 
+        // Act
         $user->password = 'updated';
+
+        // Assert
         $this->assertNotEquals($originalHash, $user->password);
         $this->assertTrue(password_verify('updated', $user->password), 'Updated password should be hashed correctly');
     }
@@ -82,11 +59,13 @@ class UserTest extends TestCase
      */
     public function testEmptyPassword(): void
     {
+        // Act
         $user = new User([
             'email' => 'test@example.com',
             'password' => '',
         ]);
 
+        // Assert
         $this->assertNull($user->password, 'Empty password should return null');
     }
 
@@ -97,6 +76,7 @@ class UserTest extends TestCase
      */
     public function testAccessibleFields(): void
     {
+        // Arrange
         $data = [
             'id' => 999,
             'email' => 'test@example.com',
@@ -105,8 +85,10 @@ class UserTest extends TestCase
             'modified' => '2026-01-15 00:00:00',
         ];
 
+        // Act
         $user = new User($data);
 
+        // Assert
         $this->assertEquals(999, $user->id);
         $this->assertEquals('test@example.com', $user->email);
         $this->assertNotNull($user->password, 'Password field should be accessible');
@@ -121,13 +103,16 @@ class UserTest extends TestCase
      */
     public function testPasswordHiddenInJson(): void
     {
+        // Arrange
         $user = new User([
             'email' => 'test@example.com',
             'password' => 'secret',
         ]);
 
+        // Act
         $json = json_decode(json_encode($user), true);
 
+        // Assert
         $this->assertArrayHasKey('email', $json, 'Email should be included in JSON');
         $this->assertArrayNotHasKey('password', $json, 'Password should be hidden in JSON');
     }
@@ -139,14 +124,17 @@ class UserTest extends TestCase
      */
     public function testPasswordHiddenInArray(): void
     {
+        // Arrange
         $user = new User([
             'id' => 1,
             'email' => 'test@example.com',
             'password' => 'secret',
         ]);
 
+        // Act
         $array = $user->toArray();
 
+        // Assert
         $this->assertArrayHasKey('email', $array, 'Email should be included in array');
         $this->assertArrayNotHasKey('password', $array, 'Password should be hidden in array');
     }
@@ -158,12 +146,16 @@ class UserTest extends TestCase
      */
     public function testPasswordHashingWithSpecialCharacters(): void
     {
+        // Arrange
         $specialPassword = 'p@ssw0rd!#$%^&*()';
+
+        // Act
         $user = new User([
             'email' => 'test@example.com',
             'password' => $specialPassword,
         ]);
 
+        // Assert
         $this->assertTrue(password_verify($specialPassword, $user->password), 'Password with special characters should be hashed correctly');
     }
 
@@ -174,9 +166,11 @@ class UserTest extends TestCase
      */
     public function testDifferentPasswordsProduceDifferentHashes(): void
     {
+        // Act
         $user1 = new User(['password' => 'password1']);
         $user2 = new User(['password' => 'password2']);
 
+        // Assert
         $this->assertNotEquals($user1->password, $user2->password);
     }
 }
