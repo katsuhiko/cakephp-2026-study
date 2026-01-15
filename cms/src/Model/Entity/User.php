@@ -43,4 +43,19 @@ class User extends Entity
     protected array $_hidden = [
         'password',
     ];
+
+    /**
+     * Password setter to hash passwords automatically
+     *
+     * @param string $password Password to hash
+     * @return string|null Hashed password
+     */
+    protected function _setPassword(string $password): ?string
+    {
+        if (strlen($password) > 0) {
+            return password_hash($password, PASSWORD_DEFAULT);
+        }
+
+        return null;
+    }
 }
