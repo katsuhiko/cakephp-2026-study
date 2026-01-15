@@ -17,6 +17,7 @@ cd ./cms
 
 ```
 php ../composer.phar require --dev phpstan/phpstan
+php ../composer.phar require --dev phpstan/extension-installer cakedc/cakephp-phpstan
 
 php ../composer.phar require cakephp/migrations "@stable"
 bin/cake plugin load Migrations
@@ -37,6 +38,9 @@ bin/cake bake model Users
 bin/cake bake model Articles
 bin/cake bake model Tags
 bin/cake bake model ArticlesTags
+
+bin/cake bake controller Articles
+bin/cake bake template Articles
 ```
 
 ### マイグレーション

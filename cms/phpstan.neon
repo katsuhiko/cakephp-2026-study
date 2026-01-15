@@ -13,7 +13,3 @@ parameters:
             identifier: missingType.iterableValue
             paths:
                 - src/Model/Table/*
-        -
-            identifier: propertyTag.unresolvableType
-            paths:
-                - src/Model/Table/*
