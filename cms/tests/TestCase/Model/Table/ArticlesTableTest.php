@@ -140,7 +140,7 @@ class ArticlesTableTest extends TestCase
                 'published' => '',
                 'shouldSucceed' => false,
                 'errorField' => 'published',
-                'errorKey' => '_empty',
+                'errorKey' => '_empty1',
             ],
         ];
     }

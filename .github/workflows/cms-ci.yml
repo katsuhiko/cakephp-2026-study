@@ -1,13 +1,9 @@
 name: CI
 
 on:
-  push:
-    paths:
-      - 'cms/**'
   pull_request:
     paths:
       - 'cms/**'
-  workflow_dispatch:
 
 permissions:
   contents: read
