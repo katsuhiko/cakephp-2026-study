@@ -106,10 +106,6 @@ class ArticlesTable extends Table
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
         $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
 
-        // PHPStanエラーを意図的に発生させる
-        $test = 'string';
-        $test->nonExistentMethod();
-
         return $rules;
     }
 }
