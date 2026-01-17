@@ -22,8 +22,11 @@ jobs:
     - name: Build Docker image
       run: docker build -t cli .
 
+    - name: Composer install
+      run: docker run --rm -v ${{ github.workspace }}:/app -w /app/cms cli php ../composer.phar install
+
     - name: Run composer check
-      run: docker run --rm -v ${{ github.workspace }}:/app -w /app/cms cli php ../composer.phar check
+      run: docker run --rm -v ${{ github.workspace }}:/app -w /app/cms -e SECURITY_SALT -e DATABASE_TEST_URL cli php ../composer.phar check
       env:
         SECURITY_SALT: f76f1c8475585c46c6acd3ddcb8f5e0f15de524637bb4080a08c4afe7cfc9144
         DATABASE_TEST_URL: sqlite://127.0.0.1/tmp/tests.sqlite
