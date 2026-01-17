@@ -82,3 +82,4 @@ docker exec -it -w /app/cms cli sqlite3 ./tmp/products.sqlite
 sqlite> .mode column
 sqlite> .headers on
 ```
+
