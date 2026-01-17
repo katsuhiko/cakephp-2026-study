@@ -99,12 +99,16 @@ class ArticlesTable extends Table
      * application integrity.
      *
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return RulesChecker
+     * @return \Cake\ORM\RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->isUnique(['slug']), ['errorField' => 'slug']);
         $rules->add($rules->existsIn(['user_id'], 'Users'), ['errorField' => 'user_id']);
+
+        // PHPStanエラーを意図的に発生させる
+        $test = 'string';
+        $test->nonExistentMethod();
 
         return $rules;
     }
