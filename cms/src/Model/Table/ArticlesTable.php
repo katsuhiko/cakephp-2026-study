@@ -99,7 +99,7 @@ class ArticlesTable extends Table
      * application integrity.
      *
      * @param \Cake\ORM\RulesChecker $rules The rules object to be modified.
-     * @return \Cake\ORM\RulesChecker
+     * @return RulesChecker
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
