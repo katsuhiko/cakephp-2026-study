@@ -67,7 +67,6 @@ class ArticlesControllerTest extends TestCase
 
         // Assert that tags are loaded
         $this->assertNotEmpty($article->tags, 'Article should have related tags');
-        $this->assertGreaterThanOrEqual(1, count($article->tags), 'Article should have at least one related tag');
         $tag = $article->tags[0];
         $this->assertInstanceOf('App\Model\Entity\Tag', $tag);
     }
