@@ -61,7 +61,6 @@ class UsersControllerTest extends TestCase
 
         // Assert that articles are loaded
         $this->assertNotEmpty($user->articles, 'User should have related articles');
-        $this->assertGreaterThanOrEqual(1, count($user->articles), 'User should have at least one related article');
         $article = $user->articles[0];
         $this->assertInstanceOf('App\Model\Entity\Article', $article);
     }
