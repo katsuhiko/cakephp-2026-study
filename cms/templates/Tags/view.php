@@ -42,10 +42,9 @@
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('User Id') ?></th>
+                            <th><?= __('User') ?></th>
                             <th><?= __('Title') ?></th>
                             <th><?= __('Slug') ?></th>
-                            <th><?= __('Body') ?></th>
                             <th><?= __('Published') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
@@ -54,10 +53,9 @@
                         <?php foreach ($tag->articles as $article) : ?>
                         <tr>
                             <td><?= h($article->id) ?></td>
-                            <td><?= h($article->user_id) ?></td>
+                            <td><?= $article->hasValue('user') ? $this->Html->link($article->user->email, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
                             <td><?= h($article->title) ?></td>
                             <td><?= h($article->slug) ?></td>
-                            <td><?= h($article->body) ?></td>
                             <td><?= $article->published ? __('Yes') : __('No'); ?></td>
                             <td><?= $article->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                             <td><?= $article->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>

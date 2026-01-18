@@ -10,8 +10,9 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
+            <?= $this->Html->link(__('View Article'), ['action' => 'view', $article->id], ['class' => 'side-nav-item']) ?>
             <?= $this->Form->postLink(
-                __('Delete'),
+                __('Delete Article'),
                 ['action' => 'delete', $article->id],
                 ['confirm' => __('Are you sure you want to delete # {0}?', $article->id), 'class' => 'side-nav-item']
             ) ?>

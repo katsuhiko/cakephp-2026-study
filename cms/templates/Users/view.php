@@ -45,7 +45,6 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('Title') ?></th>
                             <th><?= __('Slug') ?></th>
-                            <th><?= __('Body') ?></th>
                             <th><?= __('Published') ?></th>
                             <th><?= __('Created') ?></th>
                             <th><?= __('Modified') ?></th>
@@ -56,7 +55,6 @@
                             <td><?= h($article->id) ?></td>
                             <td><?= h($article->title) ?></td>
                             <td><?= h($article->slug) ?></td>
-                            <td><?= h($article->body) ?></td>
                             <td><?= $article->published ? __('Yes') : __('No'); ?></td>
                             <td><?= $article->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                             <td><?= $article->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
