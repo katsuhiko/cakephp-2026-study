@@ -77,5 +77,5 @@
 
 ## データベース管理
 - **マイグレーション**: CakePHP Migrations を使用
-- **命名**: `YYYYMMDDHHMMSS_[動詞][対象].php` (例: `20260118_CreateArticles.php`)
+- **命名**: `YYYYMMDDHHMMSS_[動詞][対象].php` (例: `20260118120000_CreateArticles.php`)
 - **Rollback**: 本番環境での Rollback は原則禁止、Forward-only で修正
