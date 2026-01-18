@@ -43,6 +43,8 @@ bin/cake bake controller Articles
 bin/cake bake template Articles
 bin/cake bake controller Users
 bin/cake bake template Users
+bin/cake bake controller Tags
+bin/cake bake template Tags
 ```
 
 ### マイグレーション
