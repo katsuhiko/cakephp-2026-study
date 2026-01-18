@@ -28,11 +28,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>
-                    <td><?= h($tag->created) ?></td>
+                    <td><?= $tag->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Modified') ?></th>
-                    <td><?= h($tag->modified) ?></td>
+                    <td><?= $tag->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                 </tr>
             </table>
             <div class="related">
@@ -58,9 +58,9 @@
                             <td><?= h($article->title) ?></td>
                             <td><?= h($article->slug) ?></td>
                             <td><?= h($article->body) ?></td>
-                            <td><?= h($article->published) ?></td>
-                            <td><?= h($article->created) ?></td>
-                            <td><?= h($article->modified) ?></td>
+                            <td><?= $article->published ? __('Yes') : __('No'); ?></td>
+                            <td><?= $article->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
+                            <td><?= $article->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Articles', 'action' => 'view', $article->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Articles', 'action' => 'edit', $article->id]) ?>

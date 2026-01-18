@@ -36,11 +36,11 @@
                 </tr>
                 <tr>
                     <th><?= __('Created') ?></th>
-                    <td><?= h($article->created) ?></td>
+                    <td><?= $article->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Modified') ?></th>
-                    <td><?= h($article->modified) ?></td>
+                    <td><?= $article->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                 </tr>
                 <tr>
                     <th><?= __('Published') ?></th>
@@ -69,8 +69,8 @@
                         <tr>
                             <td><?= h($tag->id) ?></td>
                             <td><?= h($tag->title) ?></td>
-                            <td><?= h($tag->created) ?></td>
-                            <td><?= h($tag->modified) ?></td>
+                            <td><?= $tag->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
+                            <td><?= $tag->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Tags', 'action' => 'view', $tag->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Tags', 'action' => 'edit', $tag->id]) ?>

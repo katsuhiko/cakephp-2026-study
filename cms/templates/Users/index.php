@@ -23,8 +23,8 @@
                 <tr>
                     <td><?= $this->Number->format($user->id) ?></td>
                     <td><?= h($user->email) ?></td>
-                    <td><?= h($user->created) ?></td>
-                    <td><?= h($user->modified) ?></td>
+                    <td><?= $user->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
+                    <td><?= $user->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $user->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
