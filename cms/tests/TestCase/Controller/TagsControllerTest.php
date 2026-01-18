@@ -22,6 +22,7 @@ class TagsControllerTest extends TestCase
      */
     protected array $fixtures = [
         'app.Tags',
+        'app.Users',
         'app.Articles',
         'app.ArticlesTags',
     ];
@@ -59,6 +60,13 @@ class TagsControllerTest extends TestCase
         $tag = $this->viewVariable('tag');
         $this->assertInstanceOf('App\Model\Entity\Tag', $tag);
         $this->assertEquals(1, $tag->id);
+
+        // Assert that articles with users are loaded
+        $this->assertNotEmpty($tag->articles, 'Tag should have related articles');
+        $article = $tag->articles[0];
+        $this->assertInstanceOf('App\Model\Entity\Article', $article);
+        $this->assertTrue($article->hasValue('user'), 'Article should have user loaded');
+        $this->assertInstanceOf('App\Model\Entity\User', $article->user);
     }
 
     /**

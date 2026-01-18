@@ -60,6 +60,15 @@ class ArticlesControllerTest extends TestCase
         $article = $this->viewVariable('article');
         $this->assertInstanceOf('App\Model\Entity\Article', $article);
         $this->assertEquals(1, $article->id);
+
+        // Assert that user is loaded
+        $this->assertTrue($article->hasValue('user'), 'Article should have user loaded');
+        $this->assertInstanceOf('App\Model\Entity\User', $article->user);
+
+        // Assert that tags are loaded
+        $this->assertNotEmpty($article->tags, 'Article should have related tags');
+        $tag = $article->tags[0];
+        $this->assertInstanceOf('App\Model\Entity\Tag', $tag);
     }
 
     /**
