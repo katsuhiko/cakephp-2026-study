@@ -32,7 +32,7 @@ class TagsController extends AppController
      */
     public function view(string $id)
     {
-        $tag = $this->Tags->get($id, contain: ['Articles']);
+        $tag = $this->Tags->get($id, contain: ['Articles.Users']);
         $this->set(compact('tag'));
     }
 

@@ -28,9 +28,9 @@
                     <td><?= $article->hasValue('user') ? $this->Html->link($article->user->email, ['controller' => 'Users', 'action' => 'view', $article->user->id]) : '' ?></td>
                     <td><?= h($article->title) ?></td>
                     <td><?= h($article->slug) ?></td>
-                    <td><?= h($article->published) ?></td>
-                    <td><?= h($article->created->format(DATE_RFC850)) ?></td>
-                    <td><?= h($article->modified->format(DATE_RFC850)) ?></td>
+                    <td><?= $article->published ? __('Yes') : __('No'); ?></td>
+                    <td><?= $article->created->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
+                    <td><?= $article->modified->i18nFormat('yyyy-MM-dd HH:mm') ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $article->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $article->id]) ?>
