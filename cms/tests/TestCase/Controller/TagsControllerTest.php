@@ -63,6 +63,7 @@ class TagsControllerTest extends TestCase
 
         // Assert that articles with users are loaded
         $this->assertNotEmpty($tag->articles, 'Tag should have related articles');
+        $this->assertGreaterThanOrEqual(1, count($tag->articles), 'Tag should have at least one related article to access index 0');
         $article = $tag->articles[0];
         $this->assertInstanceOf('App\Model\Entity\Article', $article);
         $this->assertTrue($article->hasValue('user'), 'Article should have user loaded');
