@@ -58,6 +58,11 @@ class UsersControllerTest extends TestCase
         $user = $this->viewVariable('user');
         $this->assertInstanceOf('App\Model\Entity\User', $user);
         $this->assertEquals(1, $user->id);
+
+        // Assert that articles are loaded
+        $this->assertNotEmpty($user->articles, 'User should have related articles');
+        $article = $user->articles[0];
+        $this->assertInstanceOf('App\Model\Entity\Article', $article);
     }
 
     /**
