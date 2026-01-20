@@ -5,6 +5,7 @@ parameters:
         - config/bootstrap.php
     paths:
         - src/
+        - packages/
     ignoreErrors:
         -
             identifier: argument.type

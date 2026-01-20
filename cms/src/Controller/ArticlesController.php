@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use CmsCore\Application\UseCase\CreateArticleUseCase;
+
 /**
  * Articles Controller
  *
@@ -40,20 +42,59 @@ class ArticlesController extends AppController
     /**
      * Add method
      *
+     * @param \CmsCore\Application\UseCase\CreateArticleUseCase $createArticleUseCase Create article use case
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add(CreateArticleUseCase $createArticleUseCase)
     {
         $article = $this->Articles->newEmptyEntity();
-        if ($this->request->is('post')) {
-            $article = $this->Articles->patchEntity($article, (array)$this->request->getData());
-            if ($this->Articles->save($article)) {
-                $this->Flash->success(__('The article has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is('post')) {
+            // Adapter層での入力形式バリデーション (CakePHPのバリデーション)
+            $article = $this->Articles->patchEntity($article, (array)$this->request->getData());
+
+            /**
+             * @var array{
+             *     user_id: string,
+             *     title: string,
+             *     slug: string,
+             *     body: string,
+             *     published: string,
+             *     tag_ids: array<string>
+             * } $data
+             */
+            $data = (array)$this->request->getData();
+
+            if (!$article->hasErrors()) {
+                // UseCaseを実行
+                [
+                    'success' => $success,
+                    'articleId' => $articleId,
+                    'errors' => $errors,
+                ] = $createArticleUseCase->execute([
+                    'user_id' => (int)($data['user_id'] ?? 0),
+                    'title' => (string)($data['title'] ?? ''),
+                    'slug' => (string)($data['slug'] ?? ''),
+                    'body' => (string)($data['body'] ?? ''),
+                    'published' => (bool)($data['published'] ?? false),
+                    'tag_ids' => array_map(fn(mixed $id): int => (int)$id, $data['tag_ids'] ?? []),
+                ]);
+
+                if ($success) {
+                    $this->Flash->success(__('The article has been saved.'));
+
+                    return $this->redirect(['action' => 'index']);
+                }
+
+                // Domain層のエラーを表示
+                foreach ($errors as $error) {
+                    $this->Flash->error($error);
+                }
+            } else {
+                $this->Flash->error(__('The article could not be saved. Please, try again.'));
             }
-            $this->Flash->error(__('The article could not be saved. Please, try again.'));
         }
+
         $users = $this->Articles->Users->find('list', limit: 200)->all();
         $tags = $this->Articles->Tags->find('list', limit: 200)->all();
         $this->set(compact('article', 'users', 'tags'));

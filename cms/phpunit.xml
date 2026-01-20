@@ -17,6 +17,9 @@
         <testsuite name="app">
             <directory>tests/TestCase/</directory>
         </testsuite>
+        <testsuite name="cms-core">
+            <directory>packages/CmsCore/Test/</directory>
+        </testsuite>
         <!-- Add plugin test suites here. -->
     </testsuites>
 
@@ -30,9 +33,11 @@
         <include>
             <directory suffix=".php">src/</directory>
             <directory suffix=".php">plugins/*/src/</directory>
+            <directory suffix=".php">packages/CmsCore/</directory>
         </include>
         <exclude>
             <file>src/Console/Installer.php</file>
+            <directory>packages/CmsCore/Test/</directory>
         </exclude>
     </source>
 </phpunit>

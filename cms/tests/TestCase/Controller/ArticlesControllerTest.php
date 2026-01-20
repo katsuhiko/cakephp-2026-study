@@ -100,11 +100,12 @@ class ArticlesControllerTest extends TestCase
         $this->enableCsrfToken();
 
         $data = [
-            'user_id' => 1,
+            'user_id' => '1',
             'title' => 'New Test Article',
             'slug' => 'new-test-article',
             'body' => 'This is a test article body.',
-            'published' => true,
+            'published' => '1',
+            'tag_ids' => ['1'],
         ];
 
         // Act
