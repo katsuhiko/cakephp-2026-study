@@ -77,7 +77,7 @@ class ArticlesController extends AppController
                     'slug' => (string)($data['slug'] ?? ''),
                     'body' => (string)($data['body'] ?? ''),
                     'published' => (bool)($data['published'] ?? false),
-                    'tag_ids' => array_map(fn(mixed $id): int => (int)$id, $data['tags']['_ids'] ?? []),
+                    'tag_ids' => array_map(fn(mixed $id): int => (int)$id, ($data['tags'] ?? [])['_ids'] ?? []),
                 ]);
 
                 if ($success) {
