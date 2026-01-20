@@ -24,6 +24,18 @@ class TagsFixture extends TestFixture
                 'created' => '2026-01-12 15:40:53',
                 'modified' => '2026-01-12 15:40:53',
             ],
+            [
+                'id' => 2,
+                'title' => 'Second Tag',
+                'created' => '2026-01-12 15:40:53',
+                'modified' => '2026-01-12 15:40:53',
+            ],
+            [
+                'id' => 3,
+                'title' => 'Third Tag',
+                'created' => '2026-01-12 15:40:53',
+                'modified' => '2026-01-12 15:40:53',
+            ],
         ];
         parent::init();
     }

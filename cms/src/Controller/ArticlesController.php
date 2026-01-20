@@ -60,7 +60,7 @@ class ArticlesController extends AppController
              *     slug: string,
              *     body: string,
              *     published: string,
-             *     tag_ids: array<string>
+             *     tags: array{_ids: array<string>}
              * } $data
              */
             $data = (array)$this->request->getData();
@@ -77,7 +77,7 @@ class ArticlesController extends AppController
                     'slug' => (string)($data['slug'] ?? ''),
                     'body' => (string)($data['body'] ?? ''),
                     'published' => (bool)($data['published'] ?? false),
-                    'tag_ids' => array_map(fn(mixed $id): int => (int)$id, $data['tag_ids'] ?? []),
+                    'tag_ids' => array_map(fn(mixed $id): int => (int)$id, $data['tags']['_ids'] ?? []),
                 ]);
 
                 if ($success) {
