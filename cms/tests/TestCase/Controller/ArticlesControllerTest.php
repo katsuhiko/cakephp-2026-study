@@ -100,11 +100,14 @@ class ArticlesControllerTest extends TestCase
         $this->enableCsrfToken();
 
         $data = [
-            'user_id' => 1,
+            'user_id' => '1',
             'title' => 'New Test Article',
             'slug' => 'new-test-article',
             'body' => 'This is a test article body.',
-            'published' => true,
+            'published' => '1',
+            'tags' => [
+                '_ids' => ['1', '2'],
+            ],
         ];
 
         // Act
@@ -116,9 +119,17 @@ class ArticlesControllerTest extends TestCase
         $this->assertFlashMessage('The article has been saved.');
 
         // Verify the article was actually saved
-        $articles = $this->getTableLocator()->get('Articles');
-        $query = $articles->find()->where(['slug' => 'new-test-article']);
-        $this->assertEquals(1, $query->count());
+        $Articles = $this->getTableLocator()->get('Articles');
+        /** @var \App\Model\Entity\Article|null $article */
+        $article = $Articles->find()
+            ->contain(['Tags'])
+            ->where(['slug' => 'new-test-article'])
+            ->first();
+        $this->assertNotNull($article, 'Article should be saved');
+
+        // Verify tags are associated
+        $this->assertNotEmpty($article->tags, 'Article should have related tags');
+        $this->assertCount(2, $article->tags, 'Article should have 2 tags');
     }
 
     /**
@@ -154,6 +165,9 @@ class ArticlesControllerTest extends TestCase
             'title' => 'Updated Article Title',
             'slug' => 'updated-article-title',
             'body' => 'Updated article body content.',
+            'tags' => [
+                '_ids' => ['2', '3'],
+            ],
         ];
 
         // Act
@@ -165,9 +179,13 @@ class ArticlesControllerTest extends TestCase
         $this->assertFlashMessage('The article has been saved.');
 
         // Verify the article was actually updated
-        $articles = $this->getTableLocator()->get('Articles');
-        $article = $articles->get(1);
+        $Articles = $this->getTableLocator()->get('Articles');
+        $article = $Articles->get(1, contain: ['Tags']);
         $this->assertEquals('Updated Article Title', $article->title);
+
+        // Verify tags are updated
+        $this->assertNotEmpty($article->tags, 'Article should have related tags');
+        $this->assertCount(2, $article->tags, 'Article should have 2 tags');
     }
 
     /**
@@ -190,8 +208,8 @@ class ArticlesControllerTest extends TestCase
         $this->assertFlashMessage('The article has been deleted.');
 
         // Verify the article was actually deleted
-        $articles = $this->getTableLocator()->get('Articles');
-        $query = $articles->find()->where(['id' => 1]);
+        $Articles = $this->getTableLocator()->get('Articles');
+        $query = $Articles->find()->where(['id' => 1]);
         $this->assertEquals(0, $query->count());
     }
 }

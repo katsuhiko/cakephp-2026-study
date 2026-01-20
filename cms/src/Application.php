@@ -25,9 +25,14 @@ use Cake\Http\BaseApplication;
 use Cake\Http\Middleware\BodyParserMiddleware;
 use Cake\Http\Middleware\CsrfProtectionMiddleware;
 use Cake\Http\MiddlewareQueue;
+use Cake\Log\Log;
 use Cake\ORM\Locator\TableLocator;
 use Cake\Routing\Middleware\AssetMiddleware;
 use Cake\Routing\Middleware\RoutingMiddleware;
+use CmsCore\Application\UseCase\CreateArticleUseCase;
+use CmsCore\Domain\Repository\ArticleRepositoryInterface;
+use CmsCore\Infrastructure\Persistence\CakeArticleRepository;
+use Psr\Log\LoggerInterface;
 
 /**
  * Application setup class.
@@ -102,6 +107,23 @@ class Application extends BaseApplication
     {
         // Allow your Tables to be dependency injected
         //$container->delegate(new \Cake\ORM\Locator\TableContainer());
+
+        // Register Repository implementations
+        $container->add(
+            ArticleRepositoryInterface::class,
+            CakeArticleRepository::class,
+        );
+
+        // Register Logger
+        $container->add(LoggerInterface::class)
+            ->setConcrete(function () {
+                return Log::engine('debug');
+            });
+
+        // Register UseCases with dependencies
+        $container->add(CreateArticleUseCase::class)
+            ->addArgument(ArticleRepositoryInterface::class)
+            ->addArgument(LoggerInterface::class);
     }
 
     /**
