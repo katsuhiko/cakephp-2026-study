@@ -60,6 +60,7 @@
         "cs-check": "phpcs --colors -p",
         "cs-fix": "phpcbf --colors -p",
         "test": "phpunit --colors=always",
+        "test:packages": "phpunit --colors=always --testsuite=cms-core",
         "stan": "phpstan analyse --memory-limit=1G"
     }
 }

@@ -66,6 +66,10 @@
 - **Entity生成**: `static create(array $data): self` という名称の Named Constructor を実装する。
 - **副作用**: 状態が変化する場合は、常に新しいインスタンスを生成して返す。
 
+### 型変換の記述方法
+- **配列の数値変換**: 配列の値を数値（int）に変換するときは、intval を使わず、アロー関数（fn）で型を明示して書くこと
+    - 例: `array_map(fn(mixed $id): int => (int)$id, $array)`
+
 ### エラーハンドリングとログ記録
 - **例外の層別責務**:
     - **Domain**: 業務ルール違反
