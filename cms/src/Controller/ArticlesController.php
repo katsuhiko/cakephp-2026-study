@@ -60,7 +60,7 @@ class ArticlesController extends AppController
              *     slug: string,
              *     body: string,
              *     published: string,
-             *     tags: array{_ids: array<string>}
+             *     tags?: array{_ids: array<string>}
              * } $data
              */
             $data = (array)$this->request->getData();
