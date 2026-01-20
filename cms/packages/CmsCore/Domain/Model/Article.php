@@ -62,9 +62,7 @@ final readonly class Article
             slug: (string)($data['slug'] ?? ''),
             body: (string)($data['body'] ?? ''),
             published: (bool)($data['published'] ?? false),
-            tagIds: isset($data['tag_ids']) && is_array($data['tag_ids'])
-                ? array_map(fn(mixed $id): int => (int)$id, $data['tag_ids'])
-                : [],
+            tagIds: array_map(fn(mixed $id): int => (int)$id, $data['tag_ids'] ?? []),
             created: null,
             modified: null,
         );
@@ -95,9 +93,7 @@ final readonly class Article
             slug: (string)($data['slug'] ?? ''),
             body: (string)($data['body'] ?? ''),
             published: (bool)($data['published'] ?? false),
-            tagIds: isset($data['tag_ids']) && is_array($data['tag_ids'])
-                ? array_map('intval', $data['tag_ids'])
-                : [],
+            tagIds: array_map(fn(mixed $id): int => (int)$id, $data['tag_ids'] ?? []),
             created: isset($data['created']) ? new DateTimeImmutable($data['created']) : null,
             modified: isset($data['modified']) ? new DateTimeImmutable($data['modified']) : null,
         );
@@ -125,9 +121,7 @@ final readonly class Article
             slug: isset($data['slug']) ? (string)$data['slug'] : $this->slug,
             body: isset($data['body']) ? (string)$data['body'] : $this->body,
             published: isset($data['published']) ? (bool)$data['published'] : $this->published,
-            tagIds: isset($data['tag_ids']) && is_array($data['tag_ids'])
-                ? array_map('intval', $data['tag_ids'])
-                : $this->tagIds,
+            tagIds: array_map(fn(mixed $id): int => (int)$id, $data['tag_ids'] ?? $this->tagIds),
             created: $this->created,
             modified: $this->modified,
         );
